@@ -1,0 +1,27 @@
+From 173898e8d7e4df988cee97c6401eb0151b504f71 Mon Sep 17 00:00:00 2001
+From: Sebastian Panceac <spanceac@gmail.com>
+Date: Fri, 16 Dec 2022 01:20:34 +0200
+Subject: [PATCH] Add modules_install rule
+
+Signed-off-by: Sebastian Panceac <spanceac@gmail.com>
+---
+ Makefile | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index ff05d6f..8358823 100755
+--- a/Makefile
++++ b/Makefile
+@@ -2067,6 +2067,9 @@ install:
+ 	install -p -m 644 $(MODULE_NAME).ko  $(MODDESTDIR)
+ 	/sbin/depmod -a ${KVER}
+ 
++modules_install:
++	$(MAKE) -C $(KSRC) M=$(shell pwd) modules_install
++
+ uninstall:
+ 	rm -f $(MODDESTDIR)/$(MODULE_NAME).ko
+ 	/sbin/depmod -a ${KVER}
+-- 
+2.34.1
+

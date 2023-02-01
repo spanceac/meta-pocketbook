@@ -1,0 +1,26 @@
+From 173eedf21b9c9895c6a2adb3d1c63cb580a932a8 Mon Sep 17 00:00:00 2001
+From: Sebastian Panceac <spanceac@gmail.com>
+Date: Sun, 5 Feb 2023 15:54:58 +0200
+Subject: [PATCH] Enable Pocketbook power LED
+
+Signed-off-by: Sebastian Panceac <spanceac@gmail.com>
+---
+ arch/arm/mach-sunxi/board.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+index 3ef179742c..ff0dc093ff 100644
+--- a/arch/arm/mach-sunxi/board.c
++++ b/arch/arm/mach-sunxi/board.c
+@@ -235,6 +235,8 @@ void s_init(void)
+ 	clock_init();
+ 	timer_init();
+ 	gpio_init();
++	/* enable power LED, PE8, active low */
++	sunxi_gpio_set_cfgpin(SUNXI_GPE(8), SUNXI_GPIO_OUTPUT);
+ #if !CONFIG_IS_ENABLED(DM_I2C)
+ 	i2c_init_board();
+ #endif
+-- 
+2.34.1
+
